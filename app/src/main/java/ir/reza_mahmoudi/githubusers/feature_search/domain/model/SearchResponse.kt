@@ -1,10 +1,10 @@
 package ir.reza_mahmoudi.githubusers.feature_search.domain.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 data class SearchResponse(
-    @Json(name = "items")
+    @SerializedName("items")
     val users: List<User>,
-    @Json(name = "total_count")
+    @SerializedName("total_count")
     val totalCount: Int? = null,
 )
