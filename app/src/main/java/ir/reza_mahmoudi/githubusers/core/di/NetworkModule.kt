@@ -11,7 +11,7 @@ import ir.reza_mahmoudi.githubusers.core.data.local.GithubApi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -38,20 +38,20 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesMoshiConvertorFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
+    fun providesGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
 
     @Singleton
     @Provides
     fun providesRetrofit(
         okHttpClient: OkHttpClient,
-        moshiConvertorFactory: MoshiConverterFactory
+        gsonConverterFactory: GsonConverterFactory
     ): Retrofit =
         Retrofit
             .Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(moshiConvertorFactory)
+            .addConverterFactory(gsonConverterFactory)
             .build()
 
 
