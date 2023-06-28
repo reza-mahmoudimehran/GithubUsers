@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class SearchResponse(
     @Json(name = "items")
-    val items: List<Item>,
+    val users: List<User>,
     @Json(name = "total_count")
     val totalCount: Int? = null,
 )
