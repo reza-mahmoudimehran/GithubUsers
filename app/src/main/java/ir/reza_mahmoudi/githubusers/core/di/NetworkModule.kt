@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ir.reza_mahmoudi.githubusers.BuildConfig
+import ir.reza_mahmoudi.githubusers.core.data.local.GithubApi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,13 +22,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesCache(@ApplicationContext context: Context) =
+    fun providesCache(@ApplicationContext context: Context): Cache =
         Cache(context.cacheDir, 10 * 10 * 1024)
 
 
     @Singleton
     @Provides
-    fun providesOkHttpClient(cache: Cache) = OkHttpClient
+    fun providesOkHttpClient(cache: Cache): OkHttpClient = OkHttpClient
         .Builder()
         .readTimeout(15, TimeUnit.SECONDS)
         .connectTimeout(15, TimeUnit.SECONDS)
@@ -37,16 +38,24 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesMoshiConvertorFactory() = MoshiConverterFactory.create()
+    fun providesMoshiConvertorFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
 
 
     @Singleton
     @Provides
-    fun providesRetrofit(okHttpClient: OkHttpClient, moshiConvertorFactory: MoshiConverterFactory) =
+    fun providesRetrofit(
+        okHttpClient: OkHttpClient,
+        moshiConvertorFactory: MoshiConverterFactory
+    ): Retrofit =
         Retrofit
             .Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(moshiConvertorFactory)
             .build()
+
+
+    @Singleton
+    @Provides
+    fun providesGithubApi(retrofit: Retrofit): GithubApi = retrofit.create(GithubApi::class.java)
 }
