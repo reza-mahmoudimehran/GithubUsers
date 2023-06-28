@@ -8,4 +8,5 @@ plugins {
 ext {
     hilt_version = "2.44.2"
     retrofitVersion = '2.9.0'
+    navVersion = "2.5.0"
 }
