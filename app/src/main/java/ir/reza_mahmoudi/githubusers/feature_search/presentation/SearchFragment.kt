@@ -38,12 +38,12 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        observeData()
+        collectData()
     }
 
-    private fun observeData() {
+    private fun collectData() {
         lifecycleScope.launch {
-            viewModel.searchResult.collectLatest{
+            viewModel.searchResult.collectLatest {
                 when (it) {
                     is ApiResult.Loading -> {
                         showLoading()
@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun initViews(){
+    private fun initViews() {
         binding.btnSearch.setOnClickListener {
             viewModel.searchUser(binding.edtSearch.text.toString())
         }
@@ -80,6 +80,7 @@ class SearchFragment : Fragment() {
             adapter = usersAdapter
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -103,11 +104,11 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun showContent(moviesList:List<User>?) {
+    private fun showContent(moviesList: List<User>?) {
         with(binding) {
-            if (moviesList.isNullOrEmpty()){
+            if (moviesList.isNullOrEmpty()) {
                 showError("Empty Result")
-            }else{
+            } else {
                 prbLoading.hide()
                 txtErrorMessage.hide()
                 rcvUsersList.show()
