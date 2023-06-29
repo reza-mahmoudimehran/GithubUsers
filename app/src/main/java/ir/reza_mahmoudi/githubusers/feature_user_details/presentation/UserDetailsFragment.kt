@@ -12,7 +12,10 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import ir.reza_mahmoudi.githubusers.core.util.network.ApiResult
 import ir.reza_mahmoudi.githubusers.core.util.network.data
+import ir.reza_mahmoudi.githubusers.core.util.view.hide
+import ir.reza_mahmoudi.githubusers.core.util.view.show
 import ir.reza_mahmoudi.githubusers.databinding.FragmentUserDetailsBinding
+import ir.reza_mahmoudi.githubusers.feature_user_details.domain.model.UserDetails
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,20 +46,19 @@ class UserDetailsFragment : Fragment() {
             viewModel.userDetails.collectLatest {
                 when (it) {
                     is ApiResult.Loading -> {
-//                        showLoading()
+                        showLoading()
                     }
                     is ApiResult.Success -> {
-//                        showContent(it.data.users)
+                        showContent(it.data)
                     }
                     is ApiResult.ServerError -> {
-//                        showError(message = it.errorBody.message ?: "Unexpected Error Happened")
+                        showError(message = it.errorBody.message ?: "Unexpected Error Happened")
                     }
                     is ApiResult.Error -> {
-//                        showError(message = it.exception.message ?: "Unexpected Error Happened")
+                        showError(message = it.exception.message ?: "Unexpected Error Happened")
                     }
                     else -> {}
                 }
-                Log.e("frg", it.data.toString())
             }
         }
     }
@@ -72,4 +74,30 @@ class UserDetailsFragment : Fragment() {
         _binding = null
     }
 
+
+    private fun showLoading() {
+        with(binding) {
+            details.root.hide()
+            txtErrorMessage.hide()
+            prbLoading.show()
+        }
+    }
+
+    private fun showError(message: String) {
+        with(binding) {
+            prbLoading.hide()
+            details.root.hide()
+            txtErrorMessage.show()
+            txtErrorMessage.text = message
+        }
+    }
+
+    private fun showContent(userDetails: UserDetails) {
+        with(binding) {
+            prbLoading.hide()
+            txtErrorMessage.hide()
+            details.root.show()
+            details.userDetails= userDetails
+        }
+    }
 }
