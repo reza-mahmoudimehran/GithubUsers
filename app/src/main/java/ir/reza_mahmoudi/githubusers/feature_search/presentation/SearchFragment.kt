@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.reza_mahmoudi.githubusers.core.util.network.data
 import ir.reza_mahmoudi.githubusers.databinding.FragmentSearchBinding
@@ -20,6 +21,7 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by viewModels()
+    private lateinit var usersAdapter: UserListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +47,19 @@ class SearchFragment : Fragment() {
 
     private fun initViews(){
         binding.btnSearch.setOnClickListener {
-            viewModel.searchUser("reza")
+            viewModel.searchUser(binding.edtSearch.text.toString())
+        }
+
+        usersAdapter = UserListAdapter {
+
+        }
+
+        binding.rcvUsersList.apply {
+            layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false
+            )
+            adapter = usersAdapter
         }
     }
     override fun onDestroyView() {
