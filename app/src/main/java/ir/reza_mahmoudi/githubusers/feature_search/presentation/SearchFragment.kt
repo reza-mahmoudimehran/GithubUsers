@@ -52,14 +52,13 @@ class SearchFragment : Fragment() {
                         showContent(it.data.users)
                     }
                     is ApiResult.ServerError -> {
-                        showError(message = it.errorBody.error ?: "Unexpected Error Happened")
+                        showError(message = it.errorBody.message ?: "Unexpected Error Happened")
                     }
                     is ApiResult.Error -> {
                         showError(message = it.exception.message ?: "Unexpected Error Happened")
                     }
                     else -> {}
                 }
-                Log.e("frg", it.data.toString())
             }
         }
     }
