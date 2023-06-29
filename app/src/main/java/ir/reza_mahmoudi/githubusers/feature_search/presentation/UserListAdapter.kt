@@ -9,7 +9,7 @@ import ir.reza_mahmoudi.githubusers.databinding.ItemUserBinding
 import ir.reza_mahmoudi.githubusers.feature_search.domain.model.User
 
 class UserListAdapter (
-    private val onItemClicked: (detailsUrl: String?) -> Unit
+    private val onItemClicked: (username: String?) -> Unit
 ) : ListAdapter<User, UserListAdapter.ViewHolder>(
     DiffCallback
 ) {
@@ -22,7 +22,7 @@ class UserListAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            onItemClicked(getItem(position).url)
+            onItemClicked(getItem(position).login)
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.reza_mahmoudi.githubusers.core.util.network.ApiResult
@@ -69,7 +70,9 @@ class SearchFragment : Fragment() {
         }
 
         usersAdapter = UserListAdapter {
-
+            findNavController().navigate(
+                SearchFragmentDirections.actionFrgSearchToFrgUserDetails(it)
+            )
         }
 
         binding.rcvUsersList.apply {

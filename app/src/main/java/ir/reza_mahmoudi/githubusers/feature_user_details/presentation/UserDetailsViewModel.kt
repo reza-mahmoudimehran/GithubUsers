@@ -2,6 +2,7 @@ package ir.reza_mahmoudi.githubusers.feature_user_details.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.reza_mahmoudi.githubusers.core.util.network.ApiResult
 import ir.reza_mahmoudi.githubusers.feature_user_details.domain.model.UserDetails
 import ir.reza_mahmoudi.githubusers.feature_user_details.domain.usecase.GetUserDetailsUseCase
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class UserDetailsViewModel @Inject constructor(
     private val getUserDetailsUseCase: GetUserDetailsUseCase
 ) : ViewModel() {
