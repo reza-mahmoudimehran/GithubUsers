@@ -10,8 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ir.reza_mahmoudi.githubusers.core.util.network.ApiResult
 import ir.reza_mahmoudi.githubusers.core.util.network.data
+import ir.reza_mahmoudi.githubusers.core.util.view.hide
+import ir.reza_mahmoudi.githubusers.core.util.view.show
 import ir.reza_mahmoudi.githubusers.databinding.FragmentSearchBinding
+import ir.reza_mahmoudi.githubusers.feature_search.domain.model.User
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -40,6 +44,21 @@ class SearchFragment : Fragment() {
     private fun observeData() {
         lifecycleScope.launch {
             viewModel.searchResult.collectLatest{
+                when (it) {
+                    is ApiResult.Loading -> {
+                        showLoading()
+                    }
+                    is ApiResult.Success -> {
+                        showContent(it.data.users)
+                    }
+                    is ApiResult.ServerError -> {
+                        showError(message = it.errorBody.error ?: "Unexpected Error Happened")
+                    }
+                    is ApiResult.Error -> {
+                        showError(message = it.exception.message ?: "Unexpected Error Happened")
+                    }
+                    else -> {}
+                }
                 Log.e("frg", it.data.toString())
             }
         }
@@ -65,5 +84,36 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun showLoading() {
+        with(binding) {
+            rcvUsersList.hide()
+            txtErrorMessage.hide()
+            prbLoading.show()
+        }
+    }
+
+    private fun showError(message: String) {
+        with(binding) {
+            prbLoading.hide()
+            rcvUsersList.hide()
+            txtErrorMessage.show()
+            txtErrorMessage.text = message
+        }
+    }
+
+    private fun showContent(moviesList:List<User>?) {
+        with(binding) {
+            if (moviesList.isNullOrEmpty()){
+                showError("Empty Result")
+            }else{
+                prbLoading.hide()
+                txtErrorMessage.hide()
+                rcvUsersList.show()
+                usersAdapter.submitList(moviesList)
+            }
+        }
     }
 }
