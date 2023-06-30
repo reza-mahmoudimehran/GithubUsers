@@ -1,7 +1,6 @@
 package ir.reza_mahmoudi.githubusers.feature_user_details.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import ir.reza_mahmoudi.githubusers.core.util.network.ApiResult
-import ir.reza_mahmoudi.githubusers.core.util.network.data
 import ir.reza_mahmoudi.githubusers.core.util.view.hide
 import ir.reza_mahmoudi.githubusers.core.util.view.show
 import ir.reza_mahmoudi.githubusers.databinding.FragmentUserDetailsBinding
@@ -69,12 +67,6 @@ class UserDetailsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-
     private fun showLoading() {
         with(binding) {
             details.root.hide()
@@ -99,5 +91,10 @@ class UserDetailsFragment : Fragment() {
             details.root.show()
             details.userDetails= userDetails
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

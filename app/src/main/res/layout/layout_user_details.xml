@@ -29,9 +29,115 @@
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:text="@{userDetails.login}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_avatar"
+            app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
             app:layout_constraintStart_toEndOf="@+id/img_avatar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/name_title"
+            app:layout_constraintTop_toBottomOf="@+id/img_avatar"
+            app:layout_constraintStart_toStartOf="parent" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@{userDetails.name}"
+            app:layout_constraintTop_toBottomOf="@+id/img_avatar"
+            app:layout_constraintStart_toEndOf="@+id/txt_name_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_company_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/company_title"
+            app:layout_constraintTop_toBottomOf="@+id/txt_name_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_company_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@{userDetails.company}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_name_title"
+            app:layout_constraintStart_toEndOf="@+id/txt_company_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_bio_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/bio_title"
+            app:layout_constraintTop_toBottomOf="@+id/txt_company_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_bio_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@{userDetails.bio}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_company_title"
+            app:layout_constraintStart_toEndOf="@+id/txt_bio_title" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_following_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/following_title"
+            app:layout_constraintTop_toTopOf="@+id/img_avatar"
+            app:layout_constraintBottom_toTopOf="@+id/txt_following_text"
+            app:layout_constraintEnd_toStartOf="@+id/txt_follower_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_following_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@{userDetails.following.toString()}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_following_title"
+            app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+            app:layout_constraintStart_toStartOf="@id/txt_following_title"
+            app:layout_constraintEnd_toEndOf="@id/txt_following_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_follower_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/follower_title"
+            app:layout_constraintTop_toTopOf="@+id/img_avatar"
+            app:layout_constraintBottom_toTopOf="@+id/txt_follower_text"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_follower_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@{userDetails.followers.toString()}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_follower_title"
+            app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+            app:layout_constraintStart_toStartOf="@id/txt_follower_title"
+            app:layout_constraintEnd_toEndOf="@id/txt_follower_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
