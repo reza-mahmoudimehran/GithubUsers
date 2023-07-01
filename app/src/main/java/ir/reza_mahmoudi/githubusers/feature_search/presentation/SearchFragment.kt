@@ -1,7 +1,6 @@
 package ir.reza_mahmoudi.githubusers.feature_search.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.reza_mahmoudi.githubusers.core.util.network.ApiResult
-import ir.reza_mahmoudi.githubusers.core.util.network.data
 import ir.reza_mahmoudi.githubusers.core.util.view.hide
 import ir.reza_mahmoudi.githubusers.core.util.view.show
 import ir.reza_mahmoudi.githubusers.databinding.FragmentSearchBinding

@@ -2,11 +2,11 @@ buildscript {
     ext {
         hilt_version = "2.44.2"
         retrofit_version = '2.9.0'
-        navVersion = "2.5.0"
+        nav_version = "2.5.0"
         coroutines_version = "1.6.4"
     }
     dependencies {
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 plugins {
